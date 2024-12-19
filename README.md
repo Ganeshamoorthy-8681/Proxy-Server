@@ -14,6 +14,6 @@ A proxy server can be used to forward requests from one domain to another, which
 To get started with the proxy server setup, clone the repository:
 
 #### 2. Run the server 
- - **This will run the app using node -  npm run start
- - **This will run the app using nodemon(development only) -  npm run dev 
+ - This will run the app using node -  npm run start
+ - This will run the app using nodemon(development only) -  npm run dev 
 
