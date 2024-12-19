@@ -1,6 +1,5 @@
 //Pass the cookie of respective service 
 export const COOKIE = `
-
 `;
 //Pass the domain 
 export const DOMAIN = "";

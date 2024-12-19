@@ -1,9 +1,11 @@
 import express from "express";
 import cors from "cors";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { COOKIE, DOMAIN, PORT } from "./Cookie.js";
+import { COOKIE, DOMAIN, PORT } from "./properties.js";
 const app = express();
 
+if (!DOMAIN?.length) { throw new Error("Please provide the Domain name in properties.js file"); }
+if (!COOKIE?.trim()?.length) { throw new Error("Please provide the Cookie in properties.js file"); }
 
 //Allow CORS and headers as mentioned HERE
 const corsOptions = {
@@ -14,10 +16,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.use('/proxy', (req, res, next) =>
+app.use('/', (req, res, next) =>
 {
   //REQUEST HEADERS
-  console.log(`REQUEST RECEIVED ------> ${ req.url }`);
+  console.log(`Request Received ------> ${ req.url }`);
   req.headers["content-type"] = 'application/json';
   req.headers["accept"] = 'application/json';
   req.headers['Cookie'] = COOKIE.replace(/[\r\n\t]/g, '').trim();;
@@ -30,7 +32,7 @@ app.use('/proxy', (req, res, next) =>
     {
       if (proxyRes.statusCode === 401)
       {
-        console.log("..........................SESSION EXPIRED............................");
+        console.log("Unauthorized...It appears that the session has expired.Please update or refresh the cookie to continue.");
       }
     }
   }
